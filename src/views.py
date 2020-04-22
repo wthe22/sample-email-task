@@ -32,8 +32,7 @@ def save_emails():
         except (KeyError, ValueError):
             msg = "BadRequest"
 
-        if msg:
-            return redirect(url_for('views.hello_name', name='me'))
+        # return redirect(url_for('views.save_emails'))
 
         print("Form:", request.form)
 
