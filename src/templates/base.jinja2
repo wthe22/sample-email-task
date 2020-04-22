@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sample Flask Website</title>
+        <style>
+            label, input, textarea {
+                float:left
+            }
+            label,input[type="submit"] {
+                clear:left
+            }
+        </style>
+    </head>
+    <body>
+        <h1><a href="/">Sample Flask Website</a></h1><br />
+        {% block content %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,8 @@
+{% extends "base.jinja2" %}
+
+{% block content %}
+    <h2>Quick links</h2>
+    {% for desc, url in quick_links.items() %}
+        <a href="{{url}}">{{desc}}</a><br />
+    {% endfor %}
+{% endblock %}
