@@ -5,15 +5,18 @@
     {{msg}}<br />
     <br />
     <form action="?" method="post">
-        <label for="username">username</label>
-        <input name="username" type="text"/>
-        <label for="email_subject">email_subject</label>
-        <input name="email_subject" type="text"/>
         <label for="event_id">event_id</label>
-        <input name="event_id" type="text"/>
+        <select name="event_id">
+            {% for event in events %}
+                <option value="{{event.id}}">{{event.id}}: {{event.name}}</option>
+            {% endfor %}
+        </select>
+        <label for="timestamp">timestamp</label>
+        <input name="timestamp" type="text" value="{{timestamp}}"/>
+        <label for="email_subject">email_subject</label>
+        <input name="email_subject" type="text" value="{{email_subject}}"/>
         <label for="email_content">email_content</label>
-        <textarea name="email_content" class="text" cols="120" rows ="20"></textarea>
+        <textarea name="email_content" class="text" cols="120" rows ="20">{{email_subject}}</textarea>
         <input type="submit" name="form.submitted" value="Save"/>
-
     </form>
 {% endblock %}

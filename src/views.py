@@ -1,10 +1,18 @@
 
+from datetime import datetime
+
 from flask import (
     Blueprint,
     request,
     url_for,
     redirect,
     render_template,
+)
+
+from src.models import (
+    Event,
+    Mail,
+    EventMail,
 )
 
 
@@ -23,17 +31,35 @@ def index():
 def save_emails():
     msg = ''
 
+    events = Event.select()
+
+    time_format = '%Y-%m-%d %H:%M'
+
+    timestamp = datetime.now().strftime(time_format)
+    email_subject = ''
+    email_content = ''
+
     if request.method == 'POST':
+        event_id = request.form['event_id']
+        timestamp = request.form['timestamp']
+        email_subject = request.form['email_subject']
+        email_content = request.form['email_content']
+
         try:
-            event_id = int(request.form['event_id'])
-            email_subject = str(request.form['email_subject'])
-            email_content = str(request.form['email_content'])
-            timestamp = request.form['timestamp']
-        except (KeyError, ValueError):
-            msg = "BadRequest"
+            send_time = datetime.strptime(timestamp, time_format)
 
-        # return redirect(url_for('views.save_emails'))
+            mail = Mail.create(subject=email_subject, content=email_content)
+            EventMail.create(event_id=event_id, mail=mail, send_time=send_time)
 
-        print("Form:", request.form)
+            msg = "Success"
+        except Exception:
+            msg = "Failed"
 
-    return render_template('save_email.jinja2', msg=msg)
+    response_data = {
+        'msg': msg,
+        'events': events,
+        'timestamp': timestamp,
+        'email_subject': email_subject,
+        'email_content': email_content,
+    }
+    return render_template('save_email.jinja2', **response_data)

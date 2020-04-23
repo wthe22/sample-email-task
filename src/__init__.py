@@ -14,6 +14,6 @@ def main():
 
     app.register_blueprint(views.bp)
 
-    DbSetup.auto_init()
+    DbSetup.initialize()
 
     return app
