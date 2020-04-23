@@ -62,8 +62,8 @@ goto main_menu
 rem ================================ Project ================================
 
 :Project.start_server
-start-web
-rem start-sched
+start "Web Server" start-web
+start "Email Scheduler" start-sched
 exit /b 0
 
 
