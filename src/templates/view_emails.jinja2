@@ -1,0 +1,21 @@
+{% extends "base.jinja2" %}
+
+{% block content %}
+    <h2>Event mails</h2>
+    <table class="striped">
+        <tr>
+            <th>Event name</th>
+            <th>Email Subject</th>
+            <th>Send Time</th>
+            <th>Sent Status</th>
+        </tr>
+        {% for event_mail in event_mails %}
+            <tr>
+                <td>{{event_mail.event_name}}</td>
+                <td>{{event_mail.subject}}</td>
+                <td>{{event_mail.send_time}}</td>
+                <td>{{event_mail.sent}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

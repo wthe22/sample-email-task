@@ -3,12 +3,42 @@
     <head>
         <title>Sample Flask Website</title>
         <style>
+            /* CSS must be moved to static files */
+
             label, input, textarea {
                 float:left
             }
             label,input[type="submit"] {
                 clear:left
             }
+
+            table.striped {
+                margin: 0px;
+                padding: 0px;
+                background-color: #fff;
+            }
+            table.striped thead {
+                display: block;
+            }
+            table.striped tbody {
+                display: block;
+                overflow: auto;
+                width: 100%;
+            }
+            table.striped td, th {
+                text-align: left;
+                padding: 5px;
+            }
+            table.striped tr:first-child {
+                background-color: #ccc;
+            }
+            table.striped tr:nth-child(odd) {
+                background-color: #eee;
+            }
+            table.striped tr:nth-child(even) {
+                background-color: #fff;
+            }
+
         </style>
     </head>
     <body>

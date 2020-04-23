@@ -22,6 +22,7 @@ bp = Blueprint('views', __name__)
 @bp.route('/')
 def index():
     quick_links = {
+        'view_emails': url_for('views.view_emails'),
         'save_emails': url_for('views.save_emails'),
     }
     return render_template('home.jinja2', quick_links=quick_links)
@@ -63,3 +64,25 @@ def save_emails():
         'email_content': email_content,
     }
     return render_template('save_email.jinja2', **response_data)
+
+
+@bp.route('/view_emails')
+def view_emails():
+    msg = ''
+
+    event_mails = (
+        Mail
+        .select(
+            Event.name.alias('event_name'),
+            Mail.subject,
+            EventMail.send_time,
+            EventMail.sent,
+        )
+        .join(EventMail)
+        .join(Event)
+    ).dicts()
+
+    response_data = {
+        'event_mails': event_mails,
+    }
+    return render_template('view_emails.jinja2', **response_data)
