@@ -24,7 +24,7 @@ class MailJob(object):
             .select()
             .where(
                 EventMail.send_time <= limit,
-                EventMail.sent == False,
+                EventMail.sent == False,  # noqa
             )
             .order_by(EventMail.send_time)
         )
@@ -57,15 +57,15 @@ class MailJob(object):
 
         event_mails = self.get_queue()
         for event_mail in event_mails:
-            log.info("Sending event mail (id: %s) '%s'"
-                     % (event_mail.id, event_mail.mail.subject))
+            log.info("Sending event mail (id: %s) '%s'",
+                     event_mail.id, event_mail.mail.subject)
             subscribers = self.get_subscribers(event_mail)
             for subscriber in subscribers:
-                log.debug("Sending event mail (id: %s) to '%s'"
-                          % (event_mail.id, subscriber.email))
+                log.debug("Sending event mail (id: %s) to '%s'",
+                          event_mail.id, subscriber.email)
 
-            log.info("Done sending event mail (id: %s) '%s'"
-                     % (event_mail.id, event_mail.mail.subject))
+            log.info("Done sending event mail (id: %s) '%s'",
+                     event_mail.id, event_mail.mail.subject)
             event_mail.sent = True
             event_mail.save()
 

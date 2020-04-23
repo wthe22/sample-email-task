@@ -52,7 +52,7 @@ def save_emails():
             mail = Mail.create(subject=email_subject, content=email_content)
             EventMail.create(event_id=event_id, mail=mail, send_time=send_time)
 
-            msg = "Success"
+            return redirect(url_for('views.view_emails'))
         except Exception:
             msg = "Failed"
 
@@ -68,8 +68,6 @@ def save_emails():
 
 @bp.route('/view_emails')
 def view_emails():
-    msg = ''
-
     event_mails = (
         Mail
         .select(
