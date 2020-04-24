@@ -1,4 +1,10 @@
 # Sample Flask Web Server and Email Scheduler #
+A simple email scheduler with website as the user interface.
+The goal of this project is to create a simple design of a scheduler,
+and it does not actually send any emails.
+Peewee ORM is used. Python and SQLite3 for Python natively supports
+unicode so emails are also unicode compliant.
+
 
 ## Installation ##
 Setup script for Windows
